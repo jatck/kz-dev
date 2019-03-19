@@ -1,0 +1,512 @@
+[1mdiff --git a/.gitignore b/.gitignore[m
+[1mnew file mode 100644[m
+[1mindex 0000000..d1dfb69[m
+[1m--- /dev/null[m
+[1m+++ b/.gitignore[m
+[36m@@ -0,0 +1,14 @@[m
+[32m+[m[32m#Editor detritus[m
+[32m+[m[32m*~[m
+[32m+[m
+[32m+[m[32m#Database files[m
+[32m+[m[32m*.mv.db[m
+[32m+[m[32m*.db[m
+[32m+[m
+[32m+[m[32m# Maven[m
+[32m+[m[32mtarget/[m
+[32m+[m
+[32m+[m[32m# IDEA[m
+[32m+[m[32m*.ipr[m
+[32m+[m[32m*.iml[m
+[32m+[m[32m.idea/[m
+\ No newline at end of file[m
+[1mdiff --git a/README.md b/README.md[m
+[1mnew file mode 100644[m
+[1mindex 0000000..ddf4f69[m
+[1m--- /dev/null[m
+[1m+++ b/README.md[m
+[36m@@ -0,0 +1,3 @@[m
+[32m+[m[32m# kz-dev[m
+[32m+[m
+[32m+[m[32mPilka nozna[m
+[1mdiff --git a/pom.xml b/pom.xml[m
+[1mnew file mode 100644[m
+[1mindex 0000000..909caac[m
+[1m--- /dev/null[m
+[1m+++ b/pom.xml[m
+[36m@@ -0,0 +1,42 @@[m
+[32m+[m[32m<?xml version="1.0" encoding="UTF-8"?>[m
+[32m+[m[32m<project xmlns="http://maven.apache.org/POM/4.0.0"[m
+[32m+[m[32m         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"[m
+[32m+[m[32m         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">[m
+[32m+[m[32m    <modelVersion>4.0.0</modelVersion>[m
+[32m+[m
+[32m+[m[32m    <groupId>pl.jz.nauka.lambda</groupId>[m
+[32m+[m[32m    <artifactId>LernLambdaOracle</artifactId>[m
+[32m+[m[32m    <version>1.0</version>[m
+[32m+[m[32m    <build>[m
+[32m+[m[32m        <plugins>[m
+[32m+[m[32m            <plugin>[m
+[32m+[m[32m                <groupId>org.apache.maven.plugins</groupId>[m
+[32m+[m[32m                <artifactId>maven-compiler-plugin</artifactId>[m
+[32m+[m[32m                <configuration>[m
+[32m+[m[32m                    <source>9</source>[m
+[32m+[m[32m                    <target>9</target>[m
+[32m+[m[32m                </configuration>[m
+[32m+[m[32m            </plugin>[m
+[32m+[m[32m        </plugins>[m
+[32m+[m[32m    </build>[m
+[32m+[m
+[32m+[m[32m    <properties>[m
+[32m+[m[32m        <java.version>1.8</java.version>[m
+[32m+[m[32m        <junit-jupiter.version>5.3.2</junit-jupiter.version>[m
+[32m+[m[32m        <mockito.version>2.24.0</mockito.version>[m
+[32m+[m[32m    </properties>[m
+[32m+[m
+[32m+[m[32m    <dependencies>[m
+[32m+[m
+[32m+[m[32m        <!-- junit 5 -->[m
+[32m+[m[32m    <dependency>[m
+[32m+[m[32m        <groupId>org.junit.jupiter</groupId>[m
+[32m+[m[32m        <artifactId>junit-jupiter-engine</artifactId>[m
+[32m+[m[32m        <version>${junit-jupiter.version}</version>[m
+[32m+[m[32m        <scope>test</scope>[m
+[32m+[m[32m    </dependency>[m
+[32m+[m
+[32m+[m[32m    </dependencies>[m
+[32m+[m
+[32m+[m
+[32m+[m[32m</project>[m
+\ No newline at end of file[m
+[1mdiff --git a/src/main/java/LabdaTest1.java b/src/main/java/LabdaTest1.java[m
+[1mnew file mode 100644[m
+[1mindex 0000000..8fc3ff8[m
+[1m--- /dev/null[m
+[1m+++ b/src/main/java/LabdaTest1.java[m
+[36m@@ -0,0 +1,40 @@[m
+[32m+[m[32mimport model.Person;[m
+[32m+[m
+[32m+[m[32mimport java.util.List;[m
+[32m+[m[32mimport java.util.function.Consumer;[m
+[32m+[m[32mimport java.util.function.Function;[m
+[32m+[m[32mimport java.util.function.Predicate;[m
+[32m+[m
+[32m+[m[32mpublic class LabdaTest1 {[m
+[32m+[m
+[32m+[m[32m    public static void main(String[] args) {[m
+[32m+[m
+[32m+[m[32m        List<Person> lista = List.of(new Person("jacek", Person.Sex.MALE,"zaak.jek@gmail.com",45),[m
+[32m+[m[32m                                     new Person("janek", Person.Sex.MALE,"isk.janek@gmail.com",25),[m
+[32m+[m[32m                                     new Person("baska", Person.Sex.FEMALE,"wisa.baska@gmail.com",18)[m
+[32m+[m[32m                                    );[m
+[32m+[m[32m        Predicate<Person> predicate = p -> p.getGender() == Person.Sex.MALE && p.getAge() >= 18 && p.getAge() <= 25;[m
+[32m+[m[32m        Function<Person,String> funkcja=p -> p.getEmailAddress();[m
+[32m+[m[32m        Consumer<String> consument=email -> System.out.println(email);[m
+[32m+[m
+[32m+[m
+[32m+[m[32m        processPersonsWithFunction(lista,predicate,funkcja,consument);[m
+[32m+[m
+[32m+[m[32m    }[m
+[32m+[m
+[32m+[m
+[32m+[m[32m    public static void processPersonsWithFunction([m
+[32m+[m[32m            List<Person> lista,[m
+[32m+[m[32m            Predicate<Person> pred,[m
+[32m+[m[32m            Function<Person, String> funct,[m
+[32m+[m[32m            Consumer<String> cons) {[m
+[32m+[m[32m        for (Person p : lista) {[m
+[32m+[m[32m            if (pred.test(p)) {[m
+[32m+[m[32m                String data = funct.apply(p);[m
+[32m+[m[32m                cons.accept(data);[m
+[32m+[m[32m            }[m
+[32m+[m[32m        }[m
+[32m+[m[32m    }[m
+[32m+[m
+[32m+[m
+[32m+[m[32m}[m
+[1mdiff --git a/src/main/java/app/SwingDemo.java b/src/main/java/app/SwingDemo.java[m
+[1mnew file mode 100644[m
+[1mindex 0000000..01ee052[m
+[1m--- /dev/null[m
+[1m+++ b/src/main/java/app/SwingDemo.java[m
+[36m@@ -0,0 +1,92 @@[m
+[32m+[m[32mpackage app;[m
+[32m+[m
+[32m+[m[32mimport javax.swing.*;[m
+[32m+[m[32mimport javax.swing.event.ListSelectionEvent;[m
+[32m+[m[32mimport javax.swing.event.ListSelectionListener;[m
+[32m+[m[32mimport java.awt.*;[m
+[32m+[m
+[32m+[m[32m/**[m
+[32m+[m[32m * @author Iuliana Cosmina[m
+[32m+[m[32m * @since 1.0[m
+[32m+[m[32m */[m
+[32m+[m[32mpublic class SwingDemo extends JFrame {[m
+[32m+[m[32m    private static  String[] data = {"John Mayer", "Frank Sinatra", "Seth MacFarlane", "Nina Simone", "BB King", "Peggy Lee"};[m
+[32m+[m[32m    //private static  String[] data;[m
+[32m+[m[32m    private JPanel mainPanel;[m
+[32m+[m[32m    private JList<String> list;[m
+[32m+[m[32m    private JTextArea textArea;[m
+[32m+[m[32m    private JButton exitButton;[m
+[32m+[m
+[32m+[m[32m    public SwingDemo(String title) {[m
+[32m+[m[32m        super(title);[m
+[32m+[m[32m        mainPanel = (JPanel) this.getContentPane();[m
+[32m+[m[32m        textArea = new JTextArea(50, 10);[m
+[32m+[m
+[32m+[m[32m        //NORTH[m
+[32m+[m[32m        list = new JList<>(data);[m
+[32m+[m[32m        list.addListSelectionListener(new LFListener(this));[m
+[32m+[m[32m        mainPanel.add(list, BorderLayout.NORTH);[m
+[32m+[m
+[32m+[m[32m        //CENTER[m
+[32m+[m[32m        JScrollPane txtPanel = new JScrollPane(textArea);[m
+[32m+[m[32m        textArea.setBackground(Color.LIGHT_GRAY);[m
+[32m+[m[32m        textArea.setEditable(false);[m
+[32m+[m[32m        mainPanel.add(txtPanel, BorderLayout.CENTER);[m
+[32m+[m
+[32m+[m[32m        //SOUTH[m
+[32m+[m[32m        exitButton = new JButton("Bye Bye!");[m
+[32m+[m[32m        exitButton.addActionListener(e -> System.exit(0));[m
+[32m+[m
+[32m+[m[32m        JPanel exitPanel = new JPanel();[m
+[32m+[m[32m        FlowLayout flowLayout = new FlowLayout();[m
+[32m+[m[32m        flowLayout.setAlignment(FlowLayout.RIGHT);[m
+[32m+[m[32m        exitPanel.setLayout(flowLayout);[m
+[32m+[m[32m        exitPanel.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);[m
+[32m+[m[32m        exitPanel.add(exitButton);[m
+[32m+[m
+[32m+[m[32m        mainPanel.add(exitPanel, BorderLayout.SOUTH);[m
+[32m+[m[32m    }[m
+[32m+[m
+[32m+[m[32m    public static void main(String... args) throws Exception {[m
+[32m+[m
+[32m+[m[32m        UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());[m
+[32m+[m[32m        UIManager.LookAndFeelInfo[] looks = UIManager.getInstalledLookAndFeels();[m
+[32m+[m
+[32m+[m[32m        /*data = new String[looks.length];[m
+[32m+[m[32m        int i =0;[m
+[32m+[m[32m        for (UIManager.LookAndFeelInfo look : looks) {[m
+[32m+[m[32m            data[i++] = look.getClassName().toString()+"<<<Jacek>>>";[m
+[32m+[m[32m        }[m
+[32m+[m[32m        //data[i] = "com.seaglasslookandfeel.SeaGlassLookAndFeel";[m
+[32m+[m[32m        */[m
+[32m+[m
+[32m+[m
+[32m+[m[32m        SwingDemo swingDemo = new SwingDemo("Swing Demo Window");[m
+[32m+[m[32m        swingDemo.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);[m
+[32m+[m[32m        swingDemo.setSize(new Dimension(500, 500));[m
+[32m+[m
+[32m+[m[32m        swingDemo.setVisible(true);[m
+[32m+[m[32m    }[m
+[32m+[m
+[32m+[m[32m    private class LFListener implements ListSelectionListener {[m
+[32m+[m[32m        private JFrame parent;[m
+[32m+[m
+[32m+[m[32m        public LFListener(JFrame swingDemo) {[m
+[32m+[m[32m            parent = swingDemo;[m
+[32m+[m[32m        }[m
+[32m+[m
+[32m+[m[32m        @Override[m
+[32m+[m[32m        public void valueChanged(ListSelectionEvent e) {[m
+[32m+[m[32m            if (!e.getValueIsAdjusting()) {[m
+[32m+[m[32m                textArea.append("kliknołeś -"+list.getSelectedValue() + "\n");[m
+[32m+[m[32m                try {[m
+[32m+[m[32m                    //UIManager.setLookAndFeel(list.getSelectedValue());[m
+[32m+[m[32m                    Thread.sleep(1000);[m
+[32m+[m[32m                    parent.repaint();[m
+[32m+[m[32m                } catch (Exception ee) {[m
+[32m+[m[32m                    System.err.println(" Could nto set look and feel! ");[m
+[32m+[m[32m                }[m
+[32m+[m[32m            }[m
+[32m+[m[32m        }[m
+[32m+[m[32m    }[m
+[32m+[m[32m}[m
+\ No newline at end of file[m
+[1mdiff --git a/src/main/java/model/Person.java b/src/main/java/model/Person.java[m
+[1mnew file mode 100644[m
+[1mindex 0000000..e248079[m
+[1m--- /dev/null[m
+[1m+++ b/src/main/java/model/Person.java[m
+[36m@@ -0,0 +1,67 @@[m
+[32m+[m[32mpackage model;[m
+[32m+[m
+[32m+[m[32mimport java.time.LocalDate;[m
+[32m+[m
+[32m+[m[32mpublic class Person {[m
+[32m+[m
+[32m+[m[32m    public enum Sex {[m
+[32m+[m[32m        MALE, FEMALE[m
+[32m+[m[32m    }[m
+[32m+[m
+[32m+[m[32m    String name;[m
+[32m+[m[32m    LocalDate birthday;[m
+[32m+[m[32m    Sex gender;[m
+[32m+[m[32m    String emailAddress;[m
+[32m+[m[32m    int age;[m
+[32m+[m
+[32m+[m[32m    public Person(String name, Sex gender, String emailAddress,int age) {[m
+[32m+[m[32m        this.name = name;[m
+[32m+[m[32m        this.gender = gender;[m
+[32m+[m[32m        this.emailAddress = emailAddress;[m
+[32m+[m[32m        this.age=age;[m
+[32m+[m[32m    }[m
+[32m+[m
+[32m+[m[32m    public int getAge() {[m
+[32m+[m[32m        return age;[m
+[32m+[m[32m    }[m
+[32m+[m
+[32m+[m[32m    public void setAge(int age) {[m
+[32m+[m[32m        this.age = age;[m
+[32m+[m[32m    }[m
+[32m+[m
+[32m+[m[32m    public String getName() {[m
+[32m+[m[32m        return name;[m
+[32m+[m[32m    }[m
+[32m+[m
+[32m+[m[32m    public void setName(String name) {[m
+[32m+[m[32m        this.name = name;[m
+[32m+[m[32m    }[m
+[32m+[m
+[32m+[m[32m    public LocalDate getBirthday() {[m
+[32m+[m[32m        return birthday;[m
+[32m+[m[32m    }[m
+[32m+[m
+[32m+[m[32m    public void setBirthday(LocalDate birthday) {[m
+[32m+[m[32m        this.birthday = birthday;[m
+[32m+[m[32m    }[m
+[32m+[m
+[32m+[m[32m    public Sex getGender() {[m
+[32m+[m[32m        return gender;[m
+[32m+[m[32m    }[m
+[32m+[m
+[32m+[m[32m    public void setGender(Sex gender) {[m
+[32m+[m[32m        this.gender = gender;[m
+[32m+[m[32m    }[m
+[32m+[m
+[32m+[m[32m    public String getEmailAddress() {[m
+[32m+[m[32m        return emailAddress;[m
+[32m+[m[32m    }[m
+[32m+[m
+[32m+[m[32m    public void setEmailAddress(String emailAddress) {[m
+[32m+[m[32m        this.emailAddress = emailAddress;[m
+[32m+[m[32m    }[m
+[32m+[m
+[32m+[m[32m    public void printPerson() {[m
+[32m+[m[32m        // ...[m
+[32m+[m[32m    }[m
+[32m+[m[32m}[m
+\ No newline at end of file[m
+[1mdiff --git a/src/main/java/przyklady/BankProgram.java b/src/main/java/przyklady/BankProgram.java[m
+[1mnew file mode 100644[m
+[1mindex 0000000..e417630[m
+[1m--- /dev/null[m
+[1m+++ b/src/main/java/przyklady/BankProgram.java[m
+[36m@@ -0,0 +1,90 @@[m
+[32m+[m[32mpackage przyklady;[m
+[32m+[m
+[32m+[m[32mimport java.util.*;[m
+[32m+[m
+[32m+[m[32mpublic class BankProgram {[m
+[32m+[m[32m    private HashMap<Integer,Integer> accounts = new HashMap<>();[m
+[32m+[m[32m    private double rate = 0.01;[m
+[32m+[m[32m    private int nextacct = 0;[m
+[32m+[m[32m    private int current = 0;[m
+[32m+[m[32m    private Scanner scanner;[m
+[32m+[m[32m    private boolean done = false;[m
+[32m+[m
+[32m+[m[32m    public static void main(String[] args) {[m
+[32m+[m[32m        BankProgram program = new BankProgram();[m
+[32m+[m[32m        program.run();[m
+[32m+[m[32m    }[m
+[32m+[m
+[32m+[m[32m    private void run() {[m
+[32m+[m[32m        scanner = new Scanner(System.in);[m
+[32m+[m[32m        while (!done) {[m
+[32m+[m[32m            System.out.print("Enter command (0=quit, 1=new, 2=select, 3=deposit, 4=loan, 5=show, 6=interest): ");[m
+[32m+[m[32m            int cnum = scanner.nextInt();[m
+[32m+[m[32m            processCommand(cnum);[m
+[32m+[m[32m        }[m
+[32m+[m[32m        scanner.close();[m
+[32m+[m[32m    }[m
+[32m+[m
+[32m+[m[32m    private void processCommand(int cnum) {[m
+[32m+[m[32m        if      (cnum == 0) quit();[m
+[32m+[m[32m        else if (cnum == 1) newAccount();[m
+[32m+[m[32m        else if (cnum == 2) select();[m
+[32m+[m[32m        else if (cnum == 3) deposit();[m
+[32m+[m[32m        else if (cnum == 4) authorizeLoan();[m
+[32m+[m[32m        else if (cnum == 5) showAll();[m
+[32m+[m[32m        else if (cnum == 6) addInterest();[m
+[32m+[m[32m        else[m
+[32m+[m[32m            System.out.println("illegal command");[m
+[32m+[m[32m    }[m
+[32m+[m
+[32m+[m[32m    private void quit() {[m
+[32m+[m[32m        done = true;[m
+[32m+[m[32m        System.out.println("Goodbye!");[m
+[32m+[m[32m    }[m
+[32m+[m
+[32m+[m[32m    private void newAccount() {[m
+[32m+[m[32m        current = nextacct++;[m
+[32m+[m[32m        accounts.put(current, 0);[m
+[32m+[m[32m        System.out.println("Your new account number is " + current);[m
+[32m+[m[32m    }[m
+[32m+[m
+[32m+[m[32m    private void select() {[m
+[32m+[m[32m        System.out.print("Enter account#: ");[m
+[32m+[m[32m        current = scanner.nextInt();[m
+[32m+[m[32m        int balance = accounts.get(current);[m
+[32m+[m[32m        System.out.println("The balance of account " + current + " is " + balance);[m
+[32m+[m[32m    }[m
+[32m+[m
+[32m+[m[32m    private void deposit() {[m
+[32m+[m[32m        System.out.print("Enter deposit amount: ");[m
+[32m+[m[32m        int amt = scanner.nextInt();[m
+[32m+[m[32m        int balance = accounts.get(current);[m
+[32m+[m[32m        accounts.put(current, balance+amt);[m
+[32m+[m[32m    }[m
+[32m+[m
+[32m+[m[32m    private void authorizeLoan() {[m
+[32m+[m[32m        System.out.print("Enter loan amount: ");[m
+[32m+[m[32m        int loanamt = scanner.nextInt();[m
+[32m+[m[32m        int balance = accounts.get(current);[m
+[32m+[m[32m        if (balance >= loanamt / 2)[m
+[32m+[m[32m            System.out.println("Your loan is approved");[m
+[32m+[m[32m        else[m
+[32m+[m[32m            System.out.println("Your loan is denied");[m
+[32m+[m[32m    }[m
+[32m+[m
+[32m+[m[32m    private void showAll() {[m
+[32m+[m[32m        Set<Integer> accts = accounts.keySet();[m
+[32m+[m[32m        System.out.println("The bank has " + accts.size() + " accounts.");[m
+[32m+[m[32m        for (int i : accts)[m
+[32m+[m[32m            System.out.println("\tAccount " + i + ": balance=" + accounts.get(i));[m
+[32m+[m[32m    }[m
+[32m+[m
+[32m+[m[32m    private void addInterest() {[m
+[32m+[m[32m        Set<Integer> accts = accounts.keySet();[m
+[32m+[m[32m        for (int i : accts) {[m
+[32m+[m[32m            int balance = accounts.get(i);[m
+[32m+[m[32m            int newbalance = (int) (balance * (1 + rate));[m
+[32m+[m[32m            accounts.put(i, newbalance);[m
+[32m+[m[32m        }[m
+[32m+[m[32m    }[m
+[32m+[m[32m}[m
+\ No newline at end of file[m
+[1mdiff --git a/src/main/java/przyklady/Calculator.java b/src/main/java/przyklady/Calculator.java[m
+[1mnew file mode 100644[m
+[1mindex 0000000..1a40f9e[m
+[1m--- /dev/null[m
+[1m+++ b/src/main/java/przyklady/Calculator.java[m
+[36m@@ -0,0 +1,76 @@[m
+[32m+[m[32mpackage przyklady;[m
+[32m+[m
+[32m+[m[32mimport model.Person;[m
+[32m+[m
+[32m+[m[32mimport java.util.Collection;[m
+[32m+[m[32mimport java.util.HashSet;[m
+[32m+[m[32mimport java.util.List;[m
+[32m+[m[32mimport java.util.Set;[m
+[32m+[m[32mimport java.util.function.Consumer;[m
+[32m+[m[32mimport java.util.function.Supplier;[m
+[32m+[m
+[32m+[m
+[32m+[m[32mpublic class Calculator {[m
+[32m+[m
+[32m+[m[32m    private Runnable runnable;[m
+[32m+[m
+[32m+[m[32m    interface IntegerMath {[m
+[32m+[m[32m        int operation(int a, int b);[m
+[32m+[m[32m    }[m
+[32m+[m
+[32m+[m[32m    public int operateBinary(int a, int b, IntegerMath op) {[m
+[32m+[m[32m        return op.operation(a, b);[m
+[32m+[m[32m    }[m
+[32m+[m
+[32m+[m[32m    public static void main(String... args) {[m
+[32m+[m
+[32m+[m[32m        Calculator myApp = new Calculator();[m
+[32m+[m[32m        Person osoba = new Person("jacek", Person.Sex.MALE,"jacek@gmail.com",45);[m
+[32m+[m[32m        List<Person> znajomi = List.of(new Person("jacek", Person.Sex.MALE,"jacek@gmail.com",45),[m
+[32m+[m[32m                new Person("marek", Person.Sex.MALE,"marek@gmail.com",5),[m
+[32m+[m[32m                new Person("darek", Person.Sex.MALE,"darek@gmail.com",4),[m
+[32m+[m[32m                new Person("ela", Person.Sex.MALE,"ela@gmail.com",35),[m
+[32m+[m[32m                new Person("iza", Person.Sex.MALE,"iza@gmail.com",25));[m
+[32m+[m
+[32m+[m[32m        IntegerMath addition = (a, b) -> a + b;[m
+[32m+[m[32m        IntegerMath subtraction = (a, b) -> a - b;[m
+[32m+[m[32m        System.out.println("40 + 2 = " +[m
+[32m+[m[32m                myApp.operateBinary(40, 2, addition));[m
+[32m+[m[32m        System.out.println("20 - 10 = " +[m
+[32m+[m[32m                myApp.operateBinary(20, 10, subtraction));[m
+[32m+[m[32m        //String::compareToIgnoreCase[m
+[32m+[m[32m        String t = " J a c e k ";[m
+[32m+[m[32m        Collection<String> lista = List.of("a","b","c");[m
+[32m+[m[32m        Collection<String> lista1= List.of("1","2","3");[m
+[32m+[m[32m        Consumer<Person> pokazNazwiska = (x) -> System.out.println(x.getName());[m
+[32m+[m[32m        Consumer<Person> pokazWiek = (x) -> System.out.println(x.getAge());[m
+[32m+[m
+[32m+[m[32m        znajomi.forEach(pokazNazwiska.andThen(pokazWiek));[m
+[32m+[m
+[32m+[m
+[32m+[m
+[32m+[m
+[32m+[m[32m        //Collection <String> tran =[m
+[32m+[m[32m         //transferElements(lista,lista1);[m
+[32m+[m
+[32m+[m[32m        Set<String> rosterSet = transferElements(lista, HashSet<String>::new);[m
+[32m+[m[32m        rosterSet.forEach(System.out::println);[m
+[32m+[m
+[32m+[m
+[32m+[m
+[32m+[m
+[32m+[m
+[32m+[m[32m    }[m
+[32m+[m
+[32m+[m[32m    public static <T, SOURCE extends Collection<T>, DEST extends Collection<T>>[m
+[32m+[m[32m    DEST transferElements([m
+[32m+[m[32m            SOURCE sourceCollection,[m
+[32m+[m[32m            Supplier<DEST> collectionFactory) {[m
+[32m+[m
+[32m+[m[32m        DEST result = collectionFactory.get();[m
+[32m+[m[32m        for (T t : sourceCollection) {[m
+[32m+[m[32m            result.add(t);[m
+[32m+[m[32m        }[m
+[32m+[m[32m        return result;[m
+[32m+[m[32m    }[m
+[32m+[m[32m}[m
+\ No newline at end of file[m
+[1mdiff --git a/src/test/java/LabdaTest1Test.java b/src/test/java/LabdaTest1Test.java[m
+[1mnew file mode 100644[m
+[1mindex 0000000..1fc7d01[m
+[1m--- /dev/null[m
+[1m+++ b/src/test/java/LabdaTest1Test.java[m
+[36m@@ -0,0 +1,27 @@[m
+[32m+[m[32mimport model.Person;[m
+[32m+[m[32mimport org.junit.jupiter.api.AfterEach;[m
+[32m+[m[32mimport org.junit.jupiter.api.BeforeEach;[m
+[32m+[m[32mimport org.junit.jupiter.api.Test;[m
+[32m+[m
+[32m+[m[32mimport java.util.List;[m
+[32m+[m
+[32m+[m[32mimport static org.junit.jupiter.api.Assertions.*;[m
+[32m+[m
+[32m+[m[32mclass LabdaTest1Test {[m
+[32m+[m
+[32m+[m
+[32m+[m[32m    @BeforeEach[m
+[32m+[m[32m    void setUp() {[m
+[32m+[m
+[32m+[m[32m        List<Person> osoba = List.of(new Person("jacek", Person.Sex.MALE,"zawislak.jacek@gmail.com",45));[m
+[32m+[m[32m    }[m
+[32m+[m
+[32m+[m[32m    @AfterEach[m
+[32m+[m[32m    void tearDown() {[m
+[32m+[m[32m    }[m
+[32m+[m
+[32m+[m[32m    @Test[m
+[32m+[m[32m    void processPersonsWithFunction() {[m
+[32m+[m
+[32m+[m[32m    }[m
+[32m+[m[32m}[m
+\ No newline at end of file[m
